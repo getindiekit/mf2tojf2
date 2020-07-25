@@ -11,16 +11,17 @@
     "name": "Paul Robert Lloyd",
     "url": "https://paulrobertlloyd.com"
   },
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/microformats/mf2tojf2.py#readme",
   "bugs": "https://github.com/microformats/mf2tojf2.py/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/paulrobertlloyd/mf2tojf2.git"
+  "repository": "git://github.com/paulrobertlloyd/mf2tojf2.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "lint": "xo '**/*.js'",
+    "lint": "xo",
     "test": "ava",
     "coverage": "c8 ava"
   },
