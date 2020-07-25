@@ -1,0 +1,77 @@
+{
+  "name": "@paulrobertlloyd/mf2tojf2",
+  "version": "0.1.0",
+  "description": "Convert MF2 to JF2",
+  "keywords": [
+    "microformats",
+    "mf2",
+    "jf2"
+  ],
+  "author": {
+    "name": "Paul Robert Lloyd",
+    "url": "https://paulrobertlloyd.com"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/microformats/mf2tojf2.py#readme",
+  "bugs": "https://github.com/microformats/mf2tojf2.py/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulrobertlloyd/mf2tojf2.git"
+  },
+  "type": "module",
+  "scripts": {
+    "lint": "xo '**/*.js'",
+    "test": "ava",
+    "coverage": "c8 ava"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1 ",
+    "ava": "^3.10.1",
+    "c8": "^7.2.1",
+    "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
+    "xo": "^0.32.1"
+  },
+  "ava": {
+    "verbose": true
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint --env HUSKY_GIT_PARAMS"
+    }
+  },
+  "xo": {
+    "space": true,
+    "extends": [
+      "plugin:import/errors"
+    ],
+    "rules": {
+      "import/extensions": [
+        "error",
+        "always"
+      ],
+      "import/no-useless-path-segments": [
+        "error",
+        {
+          "noUselessIndex": false
+        }
+      ],
+      "unicorn/import-index": [
+        "error",
+        {
+          "ignoreImports": true
+        }
+      ]
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [
+            ".js"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# Logs
+npm-debug.log*
+
+# Testing and coverage
+coverage
+
+# Dependencies
+node_modules/
+package-lock.json
