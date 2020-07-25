@@ -2,9 +2,7 @@
 
 Convert [MF2](https://microformats.org/wiki/microformats2-parsing) to [JF2](https://jf2.spec.indieweb.org).
 
-MF2 is a JSON representation of HTML marked up with [microformats2](https://microformats.org/wiki/microformats2).
-
-JF2 is a JSON based document format that describes single entries of information and lists of those entries. JF2 has evolved as a result of a variety of use-cases for different implementations exploring ways to simplify their existing use of canonical parsed microformats2 JSON output.
+JF2 is a simpler JSON serialization of microformats2 intended to be easier to consume than the standard [microformats JSON representation](https://microformats.org/wiki/microformats2).
 
 ## Usage
 
@@ -33,3 +31,7 @@ return jf2;
 ## Testing
 
 `npm test`
+
+## Credits
+
+Based on [mf2tojf2.py](https://github.com/microformats/mf2tojf2.py).
