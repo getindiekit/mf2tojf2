@@ -121,6 +121,35 @@ test('Returns content (HTML only)', t => {
   });
 });
 
+test('Returns media', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['Entry with photos'],
+        photo: [{
+          alt: 'First photo',
+          value: 'https://example.com/photo1.jpg'
+        }, {
+          alt: 'Second photo',
+          value: 'https://example.com/photo2.jpg'
+        }]
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'Entry with photos',
+    photo: [{
+      alt: 'First photo',
+      value: 'https://example.com/photo1.jpg'
+    }, {
+      alt: 'Second photo',
+      value: 'https://example.com/photo2.jpg'
+    }]
+  });
+});
+
 test('Returns author from simple value', t => {
   const result = mf2tojf2({
     items: [{
@@ -214,12 +243,12 @@ test('Returns both child entries from feed', t => {
       children: [{
         type: ['h-entry'],
         properties: {
-          name: ['First entry']
+          name: ['Entry 1']
         }
       }, {
         type: ['h-entry'],
         properties: {
-          name: ['Second entry']
+          name: ['Entry 2']
         }
       }]
     }]
@@ -233,10 +262,10 @@ test('Returns both child entries from feed', t => {
     },
     children: [{
       type: 'entry',
-      name: 'First entry'
+      name: 'Entry 1'
     }, {
       type: 'entry',
-      name: 'Second entry'
+      name: 'Entry 2'
     }]
   });
 });
@@ -246,22 +275,22 @@ test('Returns bare entries', t => {
     items: [{
       type: ['h-entry'],
       properties: {
-        name: ['First entry']
+        name: ['Entry A']
       }
     }, {
       type: ['h-entry'],
       properties: {
-        name: ['Second entry']
+        name: ['Entry B']
       }
     }]
   });
   t.deepEqual(result, {
     children: [{
       type: 'entry',
-      name: 'First entry'
+      name: 'Entry A'
     }, {
       type: 'entry',
-      name: 'Second entry'
+      name: 'Entry B'
     }]
   });
 });

@@ -5,30 +5,30 @@ const flattenProperties = object => {
   const type = object.type[0].split('-').slice(1)[0];
   newObject.type = type;
 
-  // Recursively flatten values in `properties`
+  // Flatten values in `properties`
   for (const property in object.properties) {
     if (Object.prototype.hasOwnProperty.call(object.properties, property)) {
       newObject[property] = flattenItems(object.properties[property]);
     }
   }
 
-  // Recursively flatten values in `children`
+  // Flatten values in `children`
   if (object.children) {
     const {children} = object;
-    newObject.children = children.map(child => flattenItems(child));
+    newObject.children = children.map(child => flattenItems(child, true));
   }
 
   // Return updated object
   return newObject;
 };
 
-const flattenItems = items => {
+const flattenItems = (items, returnChildren = false) => {
   // Make `items` an array, if not already
   if (!Array.isArray(items)) {
     items = new Array(items);
   }
 
-  // If array is empty, return an empty object
+  // If array is empty, return empty object
   if (items.length === 0) {
     return {};
   }
@@ -55,18 +55,17 @@ const flattenItems = items => {
         ...(item.value && {text: item.value})
       };
     }
-  } else {
-    // If an array of strings, return that array unchanged
-    // eg `category`, `syndicate-to`, etc.
-    if (typeof items[0] === 'string') {
-      return items;
-    }
+  }
 
-    // If an array of objects, return them as flattened objects within `children`
+  // If array of post objects, return them as flattened objects within `children`
+  const hasChildren = Object.prototype.hasOwnProperty.call(items[0], 'type');
+  if (returnChildren || hasChildren) {
     return {
       children: items.map(item => flattenItems(item))
     };
   }
+
+  return items;
 };
 
 export const mf2tojf2 = mf2 => {
