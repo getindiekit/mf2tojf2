@@ -43,7 +43,24 @@ test('Returns flattened entry', t => {
   });
 });
 
-test('Returns tags', t => {
+test('Returns single tag as a string', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['Entry with 1 tag'],
+        category: ['tag']
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'Entry with 1 tag',
+    category: 'tag'
+  });
+});
+
+test('Returns multiple tags as an array', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
@@ -57,23 +74,6 @@ test('Returns tags', t => {
     type: 'entry',
     name: 'Entry with tags',
     category: ['tag', 'tags']
-  });
-});
-
-test('Returns tag', t => {
-  const result = mf2tojf2({
-    items: [{
-      type: ['h-entry'],
-      properties: {
-        name: ['Entry with 1 tag'],
-        category: ['tag']
-      }
-    }]
-  });
-  t.deepEqual(result, {
-    type: 'entry',
-    name: 'Entry with 1 tag',
-    category: ['tag']
   });
 });
 

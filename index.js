@@ -7,9 +7,7 @@ const flattenProperties = object => {
 
   // Recursively flatten values in `properties`
   for (const property in object.properties) {
-    if (property === 'category') {
-      newObject.category = object.properties.category;
-    } else {
+    if (Object.prototype.hasOwnProperty.call(object.properties, property)) {
       newObject[property] = flattenItems(object.properties[property]);
     }
   }
@@ -30,30 +28,37 @@ const flattenItems = items => {
     items = new Array(items);
   }
 
-  // If `items` array is empty, return an empty object
+  // If array is empty, return an empty object
   if (items.length === 0) {
     return {};
   }
 
-  // If `items` array has single value, process it
+  // If array has single value, process it
   if (items.length === 1) {
     const item = items[0];
 
-    // If item is a string, return it
+    // If value is a string, return it
     if (typeof item === 'string') {
       return item;
     }
 
-    // If item is an object with `type` key, this is a `properties` object
+    // If value is an object with `type` key, this is a `properties` object
     if (Object.prototype.hasOwnProperty.call(item, 'type')) {
       return flattenProperties(item);
     }
 
-    // If item is an object with `value` key`, return value
+    // If item is an object with `value` key`, return `value`
     if (Object.prototype.hasOwnProperty.call(item, 'value')) {
       return item.value;
     }
   } else {
+    // If an array of strings, return that array unchanged
+    // eg `category`, `syndicate-to`, etc.
+    if (typeof items[0] === 'string') {
+      return items;
+    }
+
+    // If an array of objects, return them as flattened objects within `children`
     return {
       children: items.map(item => flattenItems(item))
     };
