@@ -37,19 +37,23 @@ const flattenItems = items => {
   if (items.length === 1) {
     const item = items[0];
 
-    // If value is a string, return it
+    // If string value, return it
     if (typeof item === 'string') {
       return item;
     }
 
-    // If value is an object with `type` key, this is a `properties` object
+    // If object with `type` key, this is a `properties` object
     if (Object.prototype.hasOwnProperty.call(item, 'type')) {
       return flattenProperties(item);
     }
 
-    // If item is an object with `value` key`, return `value`
-    if (Object.prototype.hasOwnProperty.call(item, 'value')) {
-      return item.value;
+    // If object with `html` key`, return object with `html` (with `text` if available)
+    // https://jf2.spec.indieweb.org/#html-content
+    if (Object.prototype.hasOwnProperty.call(item, 'html')) {
+      return {
+        html: item.html,
+        ...(item.value && {text: item.value})
+      };
     }
   } else {
     // If an array of strings, return that array unchanged

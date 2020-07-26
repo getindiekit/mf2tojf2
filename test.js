@@ -31,7 +31,7 @@ test('Returns flattened entry', t => {
       properties: {
         name: ['Simple entry'],
         published: ['2020-07-25'],
-        url: ['http://website.example']
+        url: ['https://example.com']
       }
     }]
   });
@@ -39,7 +39,7 @@ test('Returns flattened entry', t => {
     type: 'entry',
     name: 'Simple entry',
     published: '2020-07-25',
-    url: 'http://website.example'
+    url: 'https://example.com'
   });
 });
 
@@ -77,7 +77,7 @@ test('Returns multiple tags as an array', t => {
   });
 });
 
-test('Returns content', t => {
+test('Returns content (HTML and text)', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
@@ -93,7 +93,31 @@ test('Returns content', t => {
   t.deepEqual(result, {
     type: 'entry',
     name: 'Entry with content',
-    content: 'This content'
+    content: {
+      html: '<p><b>This</b> content',
+      text: 'This content'
+    }
+  });
+});
+
+test('Returns content (HTML only)', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['Entry with content'],
+        content: [{
+          html: '<p><b>This</b> content'
+        }]
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'Entry with content',
+    content: {
+      html: '<p><b>This</b> content'
+    }
   });
 });
 
@@ -239,5 +263,48 @@ test('Returns bare entries', t => {
       type: 'entry',
       name: 'Second entry'
     }]
+  });
+});
+
+// https://jf2.spec.indieweb.org/#deriving-note
+test('Derives a note', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        author: [{
+          type: ['h-card'],
+          properties: {
+            name: ['A. Developer'],
+            url: ['https://example.com']
+          },
+          value: 'A. Developer'
+        }],
+        name: ['Hello World'],
+        summary: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet ultrices pulvinar.'],
+        url: ['https://example.com/2015/10/21'],
+        published: ['2015-10-21T12:00:00-0700'],
+        content: [{
+          html: '<p>Donec dapibus enim lacus, <i>a vehicula magna bibendum non</i>. Phasellus id lacinia felis, vitae pellentesque enim. Sed at quam dui. Suspendisse accumsan, est id pulvinar consequat, urna ex tincidunt enim, nec sodales lectus nulla et augue. Cras venenatis vehicula molestie. Donec sagittis elit orci, sit amet egestas ex pharetra in.</p>',
+          value: 'Donec dapibus enim lacus, a vehicula magna bibendum non. Phasellus id lacinia felis, vitae pellentesque enim. Sed at quam dui. Suspendisse accumsan, est id pulvinar consequat, urna ex tincidunt enim, nec sodales lectus nulla et augue. Cras venenatis vehicula molestie. Donec sagittis elit orci, sit amet egestas ex pharetra in.'
+        }]
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    author: {
+      type: 'card',
+      url: 'https://example.com',
+      name: 'A. Developer'
+    },
+    url: 'https://example.com/2015/10/21',
+    published: '2015-10-21T12:00:00-0700',
+    name: 'Hello World',
+    summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet ultrices pulvinar.',
+    content: {
+      html: '<p>Donec dapibus enim lacus, <i>a vehicula magna bibendum non</i>. Phasellus id lacinia felis, vitae pellentesque enim. Sed at quam dui. Suspendisse accumsan, est id pulvinar consequat, urna ex tincidunt enim, nec sodales lectus nulla et augue. Cras venenatis vehicula molestie. Donec sagittis elit orci, sit amet egestas ex pharetra in.</p>',
+      text: 'Donec dapibus enim lacus, a vehicula magna bibendum non. Phasellus id lacinia felis, vitae pellentesque enim. Sed at quam dui. Suspendisse accumsan, est id pulvinar consequat, urna ex tincidunt enim, nec sodales lectus nulla et augue. Cras venenatis vehicula molestie. Donec sagittis elit orci, sit amet egestas ex pharetra in.'
+    }
   });
 });
