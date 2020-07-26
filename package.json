@@ -12,11 +12,11 @@
     "url": "https://paulrobertlloyd.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/microformats/mf2tojf2.py#readme",
-  "bugs": "https://github.com/microformats/mf2tojf2.py/issues",
+  "homepage": "https://github.com/paulrobertlloyd/mf2tojf2#readme",
+  "bugs": "https://github.com/paulrobertlloyd/mf2tojf2/issues",
   "repository": "git://github.com/paulrobertlloyd/mf2tojf2.git",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "main": "index.js",
   "type": "module",
