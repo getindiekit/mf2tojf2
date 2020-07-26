@@ -1,3 +1,6 @@
+# Development
+.vscode
+
 # Logs
 npm-debug.log*
 
@@ -5,5 +8,5 @@ npm-debug.log*
 coverage
 
 # Dependencies
-node_modules/
+node_modules
 package-lock.json
