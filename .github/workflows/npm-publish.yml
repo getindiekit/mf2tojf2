@@ -8,7 +8,7 @@ on:
     types: [created]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,23 +17,6 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm test
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-
-      # Publish to GitHub package registry
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      # Publish to NPM registry
-      - run: npm publish --@paulrobertlloyd:registry=https://registry.npmjs.org/
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
