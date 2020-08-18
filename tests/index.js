@@ -1,5 +1,7 @@
 import test from 'ava';
-import {mf2tojf2} from './index.js';
+import nock from 'nock';
+import {mf2tojf2, mf2tojf2referenced} from '../index.js';
+import {getFixture} from './helpers/fixture.js';
 
 test('Empty object returns empty object', t => {
   const result = mf2tojf2({});
@@ -31,7 +33,7 @@ test('Returns flattened entry', t => {
       properties: {
         name: ['Simple entry'],
         published: ['2020-07-25'],
-        url: ['https://example.com']
+        url: ['https://website.example']
       }
     }]
   });
@@ -39,7 +41,7 @@ test('Returns flattened entry', t => {
     type: 'entry',
     name: 'Simple entry',
     published: '2020-07-25',
-    url: 'https://example.com'
+    url: 'https://website.example'
   });
 });
 
@@ -129,10 +131,10 @@ test('Returns media', t => {
         name: ['Entry with photos'],
         photo: [{
           alt: 'First photo',
-          value: 'https://example.com/photo1.jpg'
+          value: 'https://website.example/photo1.jpg'
         }, {
           alt: 'Second photo',
-          value: 'https://example.com/photo2.jpg'
+          value: 'https://website.example/photo2.jpg'
         }]
       }
     }]
@@ -142,10 +144,10 @@ test('Returns media', t => {
     name: 'Entry with photos',
     photo: [{
       alt: 'First photo',
-      value: 'https://example.com/photo1.jpg'
+      value: 'https://website.example/photo1.jpg'
     }, {
       alt: 'Second photo',
-      value: 'https://example.com/photo2.jpg'
+      value: 'https://website.example/photo2.jpg'
     }]
   });
 });
@@ -305,13 +307,13 @@ test('Derives a note', t => {
           type: ['h-card'],
           properties: {
             name: ['A. Developer'],
-            url: ['https://example.com']
+            url: ['https://website.example']
           },
           value: 'A. Developer'
         }],
         name: ['Hello World'],
         summary: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet ultrices pulvinar.'],
-        url: ['https://example.com/2015/10/21'],
+        url: ['https://website.example/2015/10/21'],
         published: ['2015-10-21T12:00:00-0700'],
         content: [{
           html: '<p>Donec dapibus enim lacus, <i>a vehicula magna bibendum non</i>. Phasellus id lacinia felis, vitae pellentesque enim. Sed at quam dui. Suspendisse accumsan, est id pulvinar consequat, urna ex tincidunt enim, nec sodales lectus nulla et augue. Cras venenatis vehicula molestie. Donec sagittis elit orci, sit amet egestas ex pharetra in.</p>',
@@ -324,10 +326,10 @@ test('Derives a note', t => {
     type: 'entry',
     author: {
       type: 'card',
-      url: 'https://example.com',
+      url: 'https://website.example',
       name: 'A. Developer'
     },
-    url: 'https://example.com/2015/10/21',
+    url: 'https://website.example/2015/10/21',
     published: '2015-10-21T12:00:00-0700',
     name: 'Hello World',
     summary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus imperdiet ultrices pulvinar.',
@@ -336,4 +338,42 @@ test('Derives a note', t => {
       text: 'Donec dapibus enim lacus, a vehicula magna bibendum non. Phasellus id lacinia felis, vitae pellentesque enim. Sed at quam dui. Suspendisse accumsan, est id pulvinar consequat, urna ex tincidunt enim, nec sodales lectus nulla et augue. Cras venenatis vehicula molestie. Donec sagittis elit orci, sit amet egestas ex pharetra in.'
     }
   });
+});
+
+test('Adds references', async t => {
+  const scope = nock('https://their-website.example')
+    .get('/notes/lunch')
+    .reply(200, getFixture('bookmark.html'));
+  const result = await mf2tojf2referenced({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['What my friend ate for lunch yesterday'],
+        published: ['2019-02-12T10:00:00.000+00:00'],
+        url: ['https://my-website.example/bookmarks/lunch'],
+        'bookmark-of': ['https://their-website.example/notes/lunch']
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'What my friend ate for lunch yesterday',
+    published: '2019-02-12T10:00:00.000+00:00',
+    url: 'https://my-website.example/bookmarks/lunch',
+    'bookmark-of': 'https://their-website.example/notes/lunch',
+    references: {
+      'https://their-website.example/notes/lunch': {
+        type: 'entry',
+        name: 'What I ate for lunch',
+        published: '2019-01-12T15:55:00.000+00:00',
+        url: 'https://their-website.example/notes/lunch',
+        content: {
+          text: 'I ate a cheese sandwich, which was nice.',
+          html: '<p>I ate a cheese sandwich, which was nice.</p>'
+        },
+        category: ['Food', 'Lunch', 'Sandwiches']
+      }
+    }
+  });
+  scope.done();
 });

@@ -19,6 +19,10 @@
     "access": "public"
   },
   "main": "index.js",
+  "files": [
+    "lib",
+    "index.js"
+  ],
   "type": "module",
   "scripts": {
     "lint": "xo",
@@ -31,7 +35,9 @@
     "ava": "^3.10.1",
     "c8": "^7.2.1",
     "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsdoc": "^30.2.4",
     "husky": "^4.2.5",
+    "nock": "^13.0.4",
     "xo": "^0.32.1"
   },
   "ava": {
@@ -45,7 +51,8 @@
   "xo": {
     "space": true,
     "extends": [
-      "plugin:import/errors"
+      "plugin:import/errors",
+      "plugin:jsdoc/recommended"
     ],
     "rules": {
       "import/extensions": [
@@ -74,5 +81,9 @@
         }
       }
     }
+  },
+  "dependencies": {
+    "got": "^11.5.2",
+    "microformats-parser": "^1.4.0"
   }
 }
