@@ -7,27 +7,28 @@
     "mf2",
     "jf2"
   ],
+  "homepage": "https://github.com/paulrobertlloyd/mf2tojf2#readme",
   "author": {
     "name": "Paul Robert Lloyd",
     "url": "https://paulrobertlloyd.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/paulrobertlloyd/mf2tojf2#readme",
-  "bugs": "https://github.com/paulrobertlloyd/mf2tojf2/issues",
-  "repository": "git://github.com/paulrobertlloyd/mf2tojf2.git",
-  "publishConfig": {
-    "access": "public"
-  },
+  "type": "module",
   "main": "index.js",
   "files": [
     "lib",
     "index.js"
   ],
-  "type": "module",
+  "bugs": "https://github.com/paulrobertlloyd/mf2tojf2/issues",
+  "repository": "git://github.com/paulrobertlloyd/mf2tojf2.git",
   "scripts": {
     "lint": "xo",
     "test": "ava",
     "coverage": "c8 ava"
+  },
+  "dependencies": {
+    "got": "^11.5.2",
+    "microformats-parser": "^1.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
@@ -39,6 +40,9 @@
     "husky": "^4.2.5",
     "nock": "^13.0.4",
     "xo": "^0.33.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "ava": {
     "verbose": true
@@ -81,9 +85,5 @@
         }
       }
     }
-  },
-  "dependencies": {
-    "got": "^11.5.2",
-    "microformats-parser": "^1.4.0"
   }
 }
