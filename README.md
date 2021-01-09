@@ -77,6 +77,10 @@ return jf2WithReferences;
 
 `npm test`
 
+## Releasing a new version
+
+`npm run release`
+
 ## Credits
 
 Based on [mf2tojf2.py](https://github.com/microformats/mf2tojf2.py).
