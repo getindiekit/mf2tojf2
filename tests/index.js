@@ -200,7 +200,7 @@ test('Returns media (from array of URL and alternative text values)', t => {
   });
 });
 
-test('Returns author from simple value', t => {
+test('Returns author (from simple value)', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
@@ -217,7 +217,7 @@ test('Returns author from simple value', t => {
   });
 });
 
-test('Returns author from nested value', t => {
+test('Returns author (from nested value)', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
