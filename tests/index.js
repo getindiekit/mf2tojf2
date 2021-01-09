@@ -123,7 +123,55 @@ test('Returns content (HTML only)', t => {
   });
 });
 
-test('Returns media', t => {
+test('Returns media (from array of URLs)', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['Entry with photos'],
+        photo: [
+          'https://website.example/photo1.jpg',
+          'https://website.example/photo2.jpg'
+        ]
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'Entry with photos',
+    photo: [
+      'https://website.example/photo1.jpg',
+      'https://website.example/photo2.jpg'
+    ]
+  });
+});
+
+test('Returns media (from array of URL values)', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['Entry with photos'],
+        photo: [{
+          value: 'https://website.example/photo1.jpg'
+        }, {
+          value: 'https://website.example/photo2.jpg'
+        }]
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'Entry with photos',
+    photo: [{
+      url: 'https://website.example/photo1.jpg'
+    }, {
+      url: 'https://website.example/photo2.jpg'
+    }]
+  });
+});
+
+test('Returns media (from array of URL and alternative text values)', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
@@ -144,10 +192,10 @@ test('Returns media', t => {
     name: 'Entry with photos',
     photo: [{
       alt: 'First photo',
-      value: 'https://website.example/photo1.jpg'
+      url: 'https://website.example/photo1.jpg'
     }, {
       alt: 'Second photo',
-      value: 'https://website.example/photo2.jpg'
+      url: 'https://website.example/photo2.jpg'
     }]
   });
 });
