@@ -45,7 +45,7 @@ test('Returns flattened entry', t => {
   });
 });
 
-test('Returns single tag as a string', t => {
+test('Returns string from an array with a single string value', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
@@ -59,6 +59,27 @@ test('Returns single tag as a string', t => {
     type: 'entry',
     name: 'Entry with 1 tag',
     category: 'tag'
+  });
+});
+
+test('Returns number from an array with a single number value', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['Entry with latitude and longitude'],
+        latitude: [45.524330801154],
+        longitude: [-122.68068808051],
+        'postal-code': ['97209']
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'Entry with latitude and longitude',
+    latitude: 45.524330801154,
+    longitude: -122.68068808051,
+    'postal-code': '97209'
   });
 });
 
