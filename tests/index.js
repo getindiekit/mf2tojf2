@@ -144,7 +144,26 @@ test('Returns content (HTML only)', t => {
   });
 });
 
-test('Returns media (from array of URLs)', t => {
+test('Returns media (from array containing single URL)', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['Entry with photo'],
+        photo: [
+          'https://website.example/photo1.jpg'
+        ]
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'Entry with photo',
+    photo: 'https://website.example/photo1.jpg'
+  });
+});
+
+test('Returns media (from array containing multiple URLs)', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
@@ -167,7 +186,28 @@ test('Returns media (from array of URLs)', t => {
   });
 });
 
-test('Returns media (from array of URL values)', t => {
+test('Returns media (from array containing single URL value)', t => {
+  const result = mf2tojf2({
+    items: [{
+      type: ['h-entry'],
+      properties: {
+        name: ['Entry with photo'],
+        photo: [{
+          value: 'https://website.example/photo1.jpg'
+        }]
+      }
+    }]
+  });
+  t.deepEqual(result, {
+    type: 'entry',
+    name: 'Entry with photo',
+    photo: [{
+      url: 'https://website.example/photo1.jpg'
+    }]
+  });
+});
+
+test('Returns media (from array containing multiple URL values)', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
@@ -192,7 +232,7 @@ test('Returns media (from array of URL values)', t => {
   });
 });
 
-test('Returns media (from array of URL and alternative text values)', t => {
+test('Returns media (from array containing multiple URL and alternative text values)', t => {
   const result = mf2tojf2({
     items: [{
       type: ['h-entry'],
