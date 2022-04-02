@@ -9,17 +9,19 @@ JF2 is a simpler JSON serialization of microformats2 intended to be easier to co
 ### Simple (synchronous)
 
 ```js
-import {mf2tojf2} from 'mf2tojf2';
+import { mf2tojf2 } from "mf2tojf2";
 
 const mf2 = {
-  items: [{
-    type: ['h-card'],
-    properties: {
-      name: ['Paul Robert Lloyd'],
-      url: ['https://paulrobertlloyd.com']
-    }
-  }]
-}
+  items: [
+    {
+      type: ["h-card"],
+      properties: {
+        name: ["Paul Robert Lloyd"],
+        url: ["https://paulrobertlloyd.com"],
+      },
+    },
+  ],
+};
 
 const jf2 = mf2tojf2(mf2);
 return jf2;
@@ -35,19 +37,21 @@ return jf2;
 JF2 can include [a `references` property](https://jf2.spec.indieweb.org/#using-references) to exclude any non-authoritative data from the defined object.
 
 ```js
-import {mf2tojf2referenced} from 'mf2tojf2';
+import { mf2tojf2referenced } from "mf2tojf2";
 
 const mf2 = {
-  items: [{
-    type: ['h-entry'],
-    properties: {
-      name: ['What my friend ate for lunch yesterday'],
-      published: ['2019-02-12T10:00:00.000+00:00'],
-      url: ['https://my-website.example/bookmarks/lunch'],
-      'bookmark-of': ['https://their-website.example/notes/lunch']
-    }
-  }]
-}
+  items: [
+    {
+      type: ["h-entry"],
+      properties: {
+        name: ["What my friend ate for lunch yesterday"],
+        published: ["2019-02-12T10:00:00.000+00:00"],
+        url: ["https://my-website.example/bookmarks/lunch"],
+        "bookmark-of": ["https://their-website.example/notes/lunch"],
+      },
+    },
+  ],
+};
 
 const jf2WithReferences = await mf2tojf2referenced(mf2);
 return jf2WithReferences;
