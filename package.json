@@ -40,11 +40,11 @@
     "@commitlint/config-conventional": "^16.2.1",
     "ava": "^4.1.0",
     "c8": "^7.4.0",
-    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsdoc": "^38.1.6",
     "husky": "^7.0.0",
     "nock": "^13.0.5",
     "np": "^7.2.0",
+    "prettier": "2.6.2",
     "xo": "^0.48.0"
   },
   "publishConfig": {
@@ -56,35 +56,8 @@
   "xo": {
     "space": true,
     "extends": [
-      "plugin:import/errors",
       "plugin:jsdoc/recommended"
     ],
-    "rules": {
-      "import/extensions": [
-        "error",
-        "always"
-      ],
-      "import/no-useless-path-segments": [
-        "error",
-        {
-          "noUselessIndex": false
-        }
-      ],
-      "unicorn/import-index": [
-        "error",
-        {
-          "ignoreImports": true
-        }
-      ]
-    },
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "extensions": [
-            ".js"
-          ]
-        }
-      }
-    }
+    "prettier": "true"
   }
 }
