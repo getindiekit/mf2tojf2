@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=16.17.0"
   },
   "type": "module",
   "main": "index.js",
@@ -26,19 +26,18 @@
   "repository": "git://github.com/paulrobertlloyd/mf2tojf2.git",
   "scripts": {
     "lint": "xo",
-    "test": "ava",
-    "coverage": "c8 ava",
+    "test": "node --test",
+    "coverage": "c8 node --test",
     "release": "np",
     "prepare": "husky install"
   },
   "dependencies": {
     "microformats-parser": "^1.4.0",
-    "undici": "^5.2.0"
+    "undici": "^5.9.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
-    "ava": "^4.1.0",
     "c8": "^7.4.0",
     "eslint-plugin-jsdoc": "^39.2.9",
     "husky": "^8.0.0",
@@ -48,9 +47,6 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "ava": {
-    "verbose": true
   },
   "xo": {
     "space": true,
