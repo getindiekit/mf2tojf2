@@ -26,8 +26,8 @@
   "repository": "git://github.com/paulrobertlloyd/mf2tojf2.git",
   "scripts": {
     "lint": "xo",
-    "test": "node --test",
-    "coverage": "c8 node --test",
+    "test": "node --test | tap-spot",
+    "coverage": "c8 npm run test",
     "release": "np",
     "prepare": "husky install"
   },
@@ -43,6 +43,7 @@
     "husky": "^8.0.0",
     "np": "^7.2.0",
     "prettier": "2.7.1",
+    "tap-spot": "^1.1.2",
     "xo": "^0.51.0"
   },
   "publishConfig": {
