@@ -13,7 +13,7 @@ export const mockAgent = () => {
 
   // Get bookmark (Not Found)
   client.intercept({ path: "/404.html" }).reply(404, {
-    message: "Not found"
+    message: "Not found",
   });
 
   return client;
