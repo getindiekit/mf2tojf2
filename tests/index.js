@@ -1,7 +1,9 @@
 import test from "ava";
-import nock from "nock";
+import { setGlobalDispatcher } from "undici";
 import { mf2tojf2, mf2tojf2referenced } from "../index.js";
-import { getFixture } from "./helpers/fixture.js";
+import { mockAgent } from "./helpers/mock-agent.js";
+
+setGlobalDispatcher(mockAgent());
 
 test("Empty object returns empty object", (t) => {
   const result = mf2tojf2({});
@@ -532,9 +534,6 @@ test("Derives a note", (t) => {
 });
 
 test("Adds references", async (t) => {
-  const scope = nock("https://their-website.example")
-    .get("/notes/lunch")
-    .reply(200, getFixture("bookmark.html"));
   const result = await mf2tojf2referenced({
     items: [
       {
@@ -568,5 +567,4 @@ test("Adds references", async (t) => {
       },
     },
   });
-  scope.done();
 });

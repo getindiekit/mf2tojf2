@@ -1,12 +1,11 @@
 import test from "ava";
-import nock from "nock";
+import { setGlobalDispatcher } from "undici";
 import { fetchReferences } from "../lib/fetch-references.js";
-import { getFixture } from "./helpers/fixture.js";
+import { mockAgent } from "./helpers/mock-agent.js";
+
+setGlobalDispatcher(mockAgent());
 
 test("Fetches JF2 properties for each referenced URL", async (t) => {
-  const scope = nock("https://website-b.example")
-    .get("/notes/lunch")
-    .reply(200, getFixture("bookmark.html"));
   const result = await fetchReferences({
     type: "entry",
     name: "What my friend ate for lunch yesterday",
@@ -34,5 +33,4 @@ test("Fetches JF2 properties for each referenced URL", async (t) => {
       },
     },
   });
-  scope.done();
 });
