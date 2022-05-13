@@ -1,13 +1,12 @@
 import test from "ava";
-import nock from "nock";
+import { setGlobalDispatcher } from "undici";
 import { fetchMf2 } from "../lib/fetch-mf2.js";
-import { getFixture } from "./helpers/fixture.js";
+import { mockAgent } from "./helpers/mock-agent.js";
+
+setGlobalDispatcher(mockAgent());
 
 test("Fetches Microformats2 from a given URL", async (t) => {
-  const scope = nock("https://website-b.example")
-    .get("/notes/lunch")
-    .reply(200, getFixture("bookmark.html"));
-  const result = await fetchMf2("https://website-b.example/notes/lunch");
+  const result = await fetchMf2("https://website.example/notes/lunch");
   t.deepEqual(result, {
     items: [
       {
@@ -26,26 +25,31 @@ test("Fetches Microformats2 from a given URL", async (t) => {
       },
     ],
     "rel-urls": {
-      "https://website-b.example/tag/food": {
+      "https://website.example/tag/food": {
         rels: ["tag"],
         text: "Food",
       },
-      "https://website-b.example/tag/lunch": {
+      "https://website.example/tag/lunch": {
         rels: ["tag"],
         text: "Lunch",
       },
-      "https://website-b.example/tag/sandwiches/": {
+      "https://website.example/tag/sandwiches/": {
         rels: ["tag"],
         text: "Sandwiches",
       },
     },
     rels: {
       tag: [
-        "https://website-b.example/tag/food",
-        "https://website-b.example/tag/lunch",
-        "https://website-b.example/tag/sandwiches/",
+        "https://website.example/tag/food",
+        "https://website.example/tag/lunch",
+        "https://website.example/tag/sandwiches/",
       ],
     },
   });
-  scope.done();
+});
+
+test("Throws error fetching Microformats2 from a given URL", async (t) => {
+  await t.throwsAsync(fetchMf2("https://website.example/404.html"), {
+    message: "Not Found",
+  });
 });
