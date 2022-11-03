@@ -11,6 +11,7 @@ test("Fetches JF2 properties for each referenced URL", async () => {
     type: "entry",
     name: "What my friend ate for lunch yesterday",
     published: "2019-02-12T10:00:00.000+00:00",
+    category: ["foo", "bar"],
     url: "https://website-a.example/bookmarks/lunch",
     "bookmark-of": "https://website-b.example/notes/lunch",
   });
@@ -20,6 +21,7 @@ test("Fetches JF2 properties for each referenced URL", async () => {
       type: "entry",
       name: "What my friend ate for lunch yesterday",
       published: "2019-02-12T10:00:00.000+00:00",
+      category: ["foo", "bar"],
       url: "https://website-a.example/bookmarks/lunch",
       "bookmark-of": "https://website-b.example/notes/lunch",
       references: {
