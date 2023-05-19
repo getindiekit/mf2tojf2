@@ -39,12 +39,12 @@
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "c8": "^7.4.0",
-    "eslint-plugin-jsdoc": "^39.2.9",
+    "eslint-plugin-jsdoc": "^44.0.0",
     "husky": "^8.0.0",
     "np": "^7.2.0",
-    "prettier": "2.7.1",
+    "prettier": "^2.8.0",
     "tap-spot": "^1.1.2",
-    "xo": "^0.52.0"
+    "xo": "^0.54.0"
   },
   "publishConfig": {
     "access": "public"
