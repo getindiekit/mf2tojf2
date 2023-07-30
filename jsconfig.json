@@ -2,6 +2,6 @@
   "compilerOptions": {
     "checkJs": true,
     "module": "NodeNext",
-    "target": "es2021",
+    "target": "es2021"
   }
 }

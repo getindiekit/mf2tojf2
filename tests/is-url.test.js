@@ -15,6 +15,6 @@ test("Throws error if URL is not a string", () => {
     {
       name: "TypeError",
       message: "Expected a string",
-    }
+    },
   );
 });

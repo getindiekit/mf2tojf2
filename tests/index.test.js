@@ -31,7 +31,7 @@ test("Empty h-entry returns empty entry", () => {
     {
       type: "entry",
     },
-    expected
+    expected,
   );
 });
 
@@ -56,7 +56,7 @@ test("Returns flattened entry", () => {
       published: "2020-07-25",
       url: "https://website.example",
     },
-    expected
+    expected,
   );
 });
 
@@ -79,7 +79,7 @@ test("Returns string from an array with a single string value", () => {
       name: "Entry with 1 tag",
       category: "tag",
     },
-    expected
+    expected,
   );
 });
 
@@ -106,7 +106,7 @@ test("Returns number from an array with a single number value", () => {
       longitude: -122.680_688_080_51,
       "postal-code": "97209",
     },
-    expected
+    expected,
   );
 });
 
@@ -129,7 +129,7 @@ test("Returns multiple tags as an array", () => {
       name: "Entry with tags",
       category: ["tag", "tags"],
     },
-    expected
+    expected,
   );
 });
 
@@ -160,7 +160,7 @@ test("Returns content (HTML and text)", () => {
         text: "This content",
       },
     },
-    expected
+    expected,
   );
 });
 
@@ -189,7 +189,7 @@ test("Returns content (HTML only)", () => {
         html: "<p><b>This</b> content",
       },
     },
-    expected
+    expected,
   );
 });
 
@@ -212,7 +212,7 @@ test("Returns media (from array containing single URL)", () => {
       name: "Entry with photo",
       photo: "https://website.example/photo1.jpg",
     },
-    expected
+    expected,
   );
 });
 
@@ -241,7 +241,7 @@ test("Returns media (from array containing multiple URLs)", () => {
         "https://website.example/photo2.jpg",
       ],
     },
-    expected
+    expected,
   );
 });
 
@@ -272,7 +272,7 @@ test("Returns media (from array containing single URL value)", () => {
         },
       ],
     },
-    expected
+    expected,
   );
 });
 
@@ -309,7 +309,7 @@ test("Returns media (from array containing multiple URL values)", () => {
         },
       ],
     },
-    expected
+    expected,
   );
 });
 
@@ -350,7 +350,7 @@ test("Returns media (from array containing multiple URL and alternative text val
         },
       ],
     },
-    expected
+    expected,
   );
 });
 
@@ -373,7 +373,7 @@ test("Returns author (from simple value)", () => {
       name: "Entry with author",
       author: "Jane Doe",
     },
-    expected
+    expected,
   );
 });
 
@@ -406,7 +406,7 @@ test("Returns author (from nested value)", () => {
         name: "Joe Bloggs",
       },
     },
-    expected
+    expected,
   );
 });
 
@@ -453,7 +453,7 @@ test("Returns child entry from feed", () => {
         },
       ],
     },
-    expected
+    expected,
   );
 });
 
@@ -510,7 +510,7 @@ test("Returns both child entries from feed", () => {
         },
       ],
     },
-    expected
+    expected,
   );
 });
 
@@ -545,7 +545,7 @@ test("Returns bare entries", () => {
         },
       ],
     },
-    expected
+    expected,
   );
 });
 
@@ -602,7 +602,7 @@ test("Derives a note", () => {
         text: "Donec dapibus enim lacus, a vehicula magna bibendum non. Phasellus id lacinia felis, vitae pellentesque enim. Sed at quam dui. Suspendisse accumsan, est id pulvinar consequat, urna ex tincidunt enim, nec sodales lectus nulla et augue. Cras venenatis vehicula molestie. Donec sagittis elit orci, sit amet egestas ex pharetra in.",
       },
     },
-    expected
+    expected,
   );
 });
 
@@ -642,6 +642,6 @@ test("Adds references", async () => {
         },
       },
     },
-    expected
+    expected,
   );
 });

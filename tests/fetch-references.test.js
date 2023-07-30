@@ -38,6 +38,6 @@ test("Fetches JF2 properties for each referenced URL", async () => {
         },
       },
     },
-    expected
+    expected,
   );
 });

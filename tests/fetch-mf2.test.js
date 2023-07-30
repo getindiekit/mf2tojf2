@@ -49,7 +49,7 @@ test("Fetches Microformats2 from a given URL", async () => {
         ],
       },
     },
-    expected
+    expected,
   );
 });
 
@@ -60,6 +60,6 @@ test("Throws error fetching Microformats2 from a given URL", async () => {
     },
     {
       message: "Not Found",
-    }
+    },
   );
 });
