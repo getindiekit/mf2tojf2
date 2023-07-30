@@ -614,8 +614,8 @@ test("Adds references", async () => {
         properties: {
           name: ["What my friend ate for lunch yesterday"],
           published: ["2019-02-12T10:00:00.000+00:00"],
-          url: ["https://my-website.example/bookmarks/lunch"],
-          "bookmark-of": ["https://their-website.example/notes/lunch"],
+          url: ["https://website.example/bookmarks/lunch"],
+          "bookmark-of": ["https://another.example/notes/lunch"],
         },
       },
     ],
@@ -626,14 +626,14 @@ test("Adds references", async () => {
       type: "entry",
       name: "What my friend ate for lunch yesterday",
       published: "2019-02-12T10:00:00.000+00:00",
-      url: "https://my-website.example/bookmarks/lunch",
-      "bookmark-of": "https://their-website.example/notes/lunch",
+      url: "https://website.example/bookmarks/lunch",
+      "bookmark-of": "https://another.example/notes/lunch",
       references: {
-        "https://their-website.example/notes/lunch": {
+        "https://another.example/notes/lunch": {
           type: "entry",
           name: "What I ate for lunch",
           published: "2019-01-12T15:55:00.000+00:00",
-          url: "https://their-website.example/notes/lunch",
+          url: "https://another.example/notes/lunch",
           content: {
             text: "I ate a cheese sandwich, which was nice.",
             html: "<p>I ate a cheese sandwich, which was nice.</p>",

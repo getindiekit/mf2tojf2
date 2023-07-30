@@ -5,16 +5,19 @@ const agent = new MockAgent();
 agent.disableNetConnect();
 
 export const mockAgent = () => {
-  const client = agent.get("https://website.example");
-  const bookmark = getFixture("bookmark.html");
-
   // Get bookmark
-  client.intercept({ path: "/notes/lunch" }).reply(200, bookmark);
+  agent
+    .get(/https:\/\/(website|another).example/)
+    .intercept({ path: "/notes/lunch" })
+    .reply(200, getFixture("bookmark.html"));
 
   // Get bookmark (Not Found)
-  client.intercept({ path: "/404.html" }).reply(404, {
-    message: "Not found",
-  });
+  agent
+    .get("https://website.example")
+    .intercept({ path: "/404.html" })
+    .reply(404, {
+      message: "Not found",
+    });
 
-  return client;
+  return agent;
 };
