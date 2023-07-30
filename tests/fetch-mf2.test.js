@@ -56,7 +56,7 @@ test("Fetches Microformats2 from a given URL", async () => {
 test("Throws error fetching Microformats2 from a given URL", async () => {
   assert.rejects(
     async () => {
-      fetchMf2("https://website.example/404.html");
+      await fetchMf2("https://website.example/404.html");
     },
     {
       message: "Not Found",
