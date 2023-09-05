@@ -70,8 +70,7 @@ test("Uses metaformats fallback for each referenced URL", async () => {
           featured: [
             {
               alt: "Card identifying indieweb/mf2tojf2 repo. Notes 2 contributors, 6 stars, and 2 forks.",
-              value:
-                "https://opengraph.githubassets.com/6d3c627723ff987446e2917808142dfb0e2ccdd9d94db970f9a5aacbb1eb4825/getindiekit/mf2tojf2",
+              url: "https://opengraph.githubassets.com/6d3c627723ff987446e2917808142dfb0e2ccdd9d94db970f9a5aacbb1eb4825/getindiekit/mf2tojf2",
             },
           ],
           publication: "GitHub",
