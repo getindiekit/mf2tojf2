@@ -11,6 +11,12 @@ export const mockAgent = () => {
     .intercept({ path: "/notes/lunch" })
     .reply(200, getFixture("bookmark.html"));
 
+  // Get page without mf2
+  agent
+    .get("https://github.com")
+    .intercept({ path: "/getindiekit/mf2tojf2" })
+    .reply(200, getFixture("repo.html"));
+
   // Get bookmark (Not Found)
   agent
     .get("https://website.example")
