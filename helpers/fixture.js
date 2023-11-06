@@ -1,13 +1,14 @@
 import fs from "node:fs";
-import path from "node:path";
-import { __dirname } from "../index.js";
+import { fileURLToPath } from "node:url";
 
 /**
- * @param {string} filename Fixture’s file name
- * @param {BufferEncoding} encoding String encoding
- * @returns {Promise|object} File contents
+ * @param {string} filename - Fixture’s file name
+ * @param {boolean} utf8 - Encoding fixture as UTF8
+ * @returns {object} File contents
  */
-export const getFixture = (filename, encoding = "utf8") => {
-  const file = path.resolve(__dirname, `helpers/fixtures/${filename}`);
-  return fs.readFileSync(file, { encoding });
+export const getFixture = (filename, utf8 = true) => {
+  const file = fileURLToPath(new URL(filename, import.meta.url));
+  return fs.readFileSync(file, {
+    ...(utf8 && { encoding: "utf8" }),
+  });
 };
