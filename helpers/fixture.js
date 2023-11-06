@@ -9,6 +9,5 @@ import { __dirname } from "../index.js";
  */
 export const getFixture = (filename, encoding = "utf8") => {
   const file = path.resolve(__dirname, `helpers/fixtures/${filename}`);
-  console.log('file', file)
   return fs.readFileSync(file, { encoding });
 };
