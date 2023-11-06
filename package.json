@@ -26,7 +26,7 @@
   "repository": "git://github.com/paulrobertlloyd/mf2tojf2.git",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "test": "node --test | tap-spot",
+    "test": "node --test --test-reporter dot",
     "coverage": "c8 npm run test",
     "release": "np",
     "prepare": "husky install"
@@ -45,8 +45,7 @@
     "eslint-plugin-unicorn": "^49.0.0",
     "husky": "^8.0.0",
     "np": "^8.0.0",
-    "prettier": "^3.0.0",
-    "tap-spot": "^1.1.2"
+    "prettier": "^3.0.0"
   },
   "publishConfig": {
     "access": "public"
