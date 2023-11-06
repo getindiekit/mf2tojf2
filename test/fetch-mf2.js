@@ -2,9 +2,9 @@ import { strict as assert } from "node:assert";
 import test from "node:test";
 import { setGlobalDispatcher } from "undici";
 import { fetchMf2 } from "../lib/fetch-mf2.js";
-import { mockAgent } from "../helpers/mock-agent.js";
+import { mockClient } from "../helpers/mock-agent.js";
 
-setGlobalDispatcher(mockAgent());
+setGlobalDispatcher(mockClient());
 
 test("Fetches Microformats2 from a given URL", async () => {
   const expected = await fetchMf2("https://website.example/notes/lunch");

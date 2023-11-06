@@ -1,10 +1,14 @@
 import { MockAgent } from "undici";
 import { getFixture } from "./fixture.js";
 
-const agent = new MockAgent();
-agent.disableNetConnect();
+/**
+ * @returns {import("undici").MockAgent} Undici MockAgent
+ * @see {@link https://undici.nodejs.org/#/docs/api/MockAgent}
+*/
+export const mockClient = () => {
+  const agent = new MockAgent();
+  agent.disableNetConnect();
 
-export const mockAgent = () => {
   // Get bookmark
   agent
     .get(/https:\/\/(website|another).example/)
