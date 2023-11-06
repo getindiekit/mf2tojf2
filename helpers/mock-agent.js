@@ -15,7 +15,7 @@ export const mockClient = () => {
     .intercept({ path: "/notes/lunch" })
     .reply(200, getFixture("bookmark.html"));
 
-  // Get page without mf2
+  // Get page without MF2
   agent
     .get("https://github.com")
     .intercept({ path: "/getindiekit/mf2tojf2" })

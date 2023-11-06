@@ -4,7 +4,7 @@ import { __dirname } from "../index.js";
 
 /**
  * @param {string} filename Fixture’s file name
- * @param {string} encoding String encoding
+ * @param {BufferEncoding} encoding String encoding
  * @returns {Promise|object} File contents
  */
 export const getFixture = (filename, encoding = "utf8") => {
