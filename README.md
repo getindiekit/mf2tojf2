@@ -1,8 +1,14 @@
 # MF2 to JF2
 
+[![Build status](https://github.com/getindiekit/mf2tojf2/workflows/build/badge.svg)](https://github.com/getindiekit/mf2tojf2/actions)
+
 Convert [MF2](https://microformats.org/wiki/microformats2-parsing) to [JF2](https://jf2.spec.indieweb.org).
 
 JF2 is a simpler JSON serialization of microformats2 intended to be easier to consume than the standard [microformats JSON representation](https://microformats.org/wiki/microformats2).
+
+## Requirements
+
+- [Node.js](https://nodejs.org) v20+
 
 ## Usage
 
