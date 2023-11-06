@@ -2,7 +2,7 @@ import { strict as assert } from "node:assert";
 import test from "node:test";
 import { setGlobalDispatcher } from "undici";
 import { mf2tojf2, mf2tojf2referenced } from "../index.js";
-import { mockAgent } from "./helpers/mock-agent.js";
+import { mockAgent } from "../helpers/mock-agent.js";
 
 setGlobalDispatcher(mockAgent());
 
