@@ -51,7 +51,6 @@ test("Uses metaformats fallback for each referenced URL", async () => {
     url: "https://website.example/bookmarks/repo",
     "bookmark-of": "https://github.com/getindiekit/mf2tojf2",
   });
-  console.log(expected);
   assert.deepEqual(
     {
       type: "entry",
