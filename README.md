@@ -8,7 +8,7 @@ JF2 is a simpler JSON serialization of microformats2 intended to be easier to co
 
 ## Requirements
 
-- [Node.js](https://nodejs.org) v20+
+- [Node.js](https://nodejs.org) v18+
 
 ## Usage
 
