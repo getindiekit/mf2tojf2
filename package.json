@@ -39,12 +39,12 @@
     "@commitlint/config-conventional": "^18.0.0",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-jsdoc": "^46.4.5",
-    "eslint-plugin-unicorn": "^49.0.0",
+    "eslint-plugin-jsdoc": "^48.0.0",
+    "eslint-plugin-unicorn": "^50.0.0",
     "husky": "^8.0.0",
-    "np": "^8.0.0",
+    "np": "^9.0.0",
     "prettier": "^3.0.0",
-    "undici": "^5.27.2"
+    "undici": "^6.0.0"
   },
   "publishConfig": {
     "access": "public"
