@@ -51,6 +51,8 @@ describe("mf2tojf2", () => {
       category: ["foo", "bar"],
       url: "https://website.example/bookmarks/repo",
       "bookmark-of": "https://github.com/getindiekit/mf2tojf2",
+      "mp-destination": "https://website.example",
+      "mp-syndicate-to": "https://example.social/@username",
     });
     assert.deepEqual(
       {
@@ -60,6 +62,8 @@ describe("mf2tojf2", () => {
         category: ["foo", "bar"],
         url: "https://website.example/bookmarks/repo",
         "bookmark-of": "https://github.com/getindiekit/mf2tojf2",
+        "mp-destination": "https://website.example",
+        "mp-syndicate-to": "https://example.social/@username",
         references: {
           "https://github.com/getindiekit/mf2tojf2": {
             url: "https://github.com/getindiekit/mf2tojf2",

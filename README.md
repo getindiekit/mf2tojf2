@@ -54,6 +54,7 @@ const mf2 = {
         published: ["2019-02-12T10:00:00.000+00:00"],
         url: ["https://my-website.example/bookmarks/lunch"],
         "bookmark-of": ["https://their-website.example/notes/lunch"],
+        "mp-syndicate-to": "https://example.social/@username",
       },
     },
   ],
@@ -67,6 +68,7 @@ return jf2WithReferences;
 //  published: '2019-02-12T10:00:00.000+00:00',
 //  url: 'https://my-website.example/bookmarks/lunch',
 //  'bookmark-of': 'https://their-website.example/notes/lunch',
+//  'mp-syndicate-to': 'https://example.social/@username',
 //  references: {
 //    'https://their-website.example/notes/lunch': {
 //      type: 'entry',
@@ -82,6 +84,9 @@ return jf2WithReferences;
 //  }
 // }
 ```
+
+> [!NOTE]\
+> Values for `url`, and any property prefixed with `mp-`, are excluded from referencing.
 
 ## Testing
 
