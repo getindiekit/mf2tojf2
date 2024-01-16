@@ -617,6 +617,7 @@ describe("mf2tojf2", () => {
             published: ["2019-02-12T10:00:00.000+00:00"],
             url: ["https://website.example/bookmarks/lunch"],
             "bookmark-of": ["https://another.example/notes/lunch"],
+            "mp-syndicate-to": "https://example.social/@username",
           },
         },
       ],
@@ -629,6 +630,7 @@ describe("mf2tojf2", () => {
         published: "2019-02-12T10:00:00.000+00:00",
         url: "https://website.example/bookmarks/lunch",
         "bookmark-of": "https://another.example/notes/lunch",
+        "mp-syndicate-to": "https://example.social/@username",
         references: {
           "https://another.example/notes/lunch": {
             type: "entry",
@@ -642,6 +644,33 @@ describe("mf2tojf2", () => {
             category: ["Food", "Lunch", "Sandwiches"],
           },
         },
+      },
+      expected,
+    );
+  });
+
+  it("Doesn’t add references", async () => {
+    const expected = await mf2tojf2referenced({
+      items: [
+        {
+          type: ["h-entry"],
+          properties: {
+            name: ["What my friend ate for lunch yesterday"],
+            published: ["2019-02-12T10:00:00.000+00:00"],
+            url: ["https://website.example/bookmarks/lunch"],
+            "mp-syndicate-to": "https://example.social/@username",
+          },
+        },
+      ],
+    });
+
+    assert.deepEqual(
+      {
+        type: "entry",
+        name: "What my friend ate for lunch yesterday",
+        published: "2019-02-12T10:00:00.000+00:00",
+        url: "https://website.example/bookmarks/lunch",
+        "mp-syndicate-to": "https://example.social/@username",
       },
       expected,
     );
