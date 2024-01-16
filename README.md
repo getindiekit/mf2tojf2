@@ -8,7 +8,7 @@ JF2 is a simpler JSON serialization of microformats2 intended to be easier to co
 
 ## Requirements
 
-- [Node.js](https://nodejs.org) v18+
+- [Node.js](https://nodejs.org) v18.18+
 
 ## Usage
 
@@ -30,12 +30,18 @@ const mf2 = {
 };
 
 const jf2 = mf2tojf2(mf2);
-return jf2;
-// => {
-//  type: 'card',
-//  name: 'Paul Robert Lloyd',
-//  url: 'https://paulrobertlloyd.com'
-// }
+
+console.log(jf2);
+```
+
+Returns:
+
+```js
+{
+  type: "card",
+  name: "Paul Robert Lloyd",
+  url: "https://paulrobertlloyd.com"
+}
 ```
 
 ### With references (asynchronous)
@@ -61,28 +67,34 @@ const mf2 = {
 };
 
 const jf2WithReferences = await mf2tojf2referenced(mf2);
-return jf2WithReferences;
-// => {
-//  type: 'entry',
-//  name: 'What my friend ate for lunch yesterday',
-//  published: '2019-02-12T10:00:00.000+00:00',
-//  url: 'https://my-website.example/bookmarks/lunch',
-//  'bookmark-of': 'https://their-website.example/notes/lunch',
-//  'mp-syndicate-to': 'https://example.social/@username',
-//  references: {
-//    'https://their-website.example/notes/lunch': {
-//      type: 'entry',
-//      name: 'What I ate for lunch',
-//      published: '2019-01-12T15:55:00.000+00:00',
-//      url: 'https://their-website.example/notes/lunch',
-//      content: {
-//        text: 'I ate a cheese sandwich, which was nice.',
-//        html: '<p>I ate a cheese sandwich, which was nice.</p>'
-//      },
-//      category: ['Food', 'Lunch', 'Sandwiches']
-//    }
-//  }
-// }
+
+console.log(jf2WithReferences);
+```
+
+Returns:
+
+```js
+{
+  type: "entry",
+  name: "What my friend ate for lunch yesterday",
+  published: "2019-02-12T10:00:00.000+00:00",
+  url: "https://my-website.example/bookmarks/lunch",
+  "bookmark-of": "https://their-website.example/notes/lunch",
+  "mp-syndicate-to": "https://example.social/@username",
+  references: {
+    "https://their-website.example/notes/lunch": {
+      type: "entry",
+      name: "What I ate for lunch",
+      published: "2019-01-12T15:55:00.000+00:00",
+      url: "https://their-website.example/notes/lunch",
+      content: {
+        text: "I ate a cheese sandwich, which was nice.",
+        html: "<p>I ate a cheese sandwich, which was nice.</p>"
+      },
+      category: ["Food", "Lunch", "Sandwiches"]
+    }
+  }
+}
 ```
 
 > [!NOTE]\
