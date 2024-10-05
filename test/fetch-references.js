@@ -1,5 +1,5 @@
 import { strict as assert } from "node:assert";
-import { describe, it } from "node:test";
+import { describe, it, mock } from "node:test";
 import { setGlobalDispatcher } from "undici";
 import { fetchReferences } from "../lib/fetch-references.js";
 import { mockClient } from "../helpers/mock-agent.js";
@@ -40,6 +40,34 @@ describe("mf2tojf2", () => {
             category: ["Food", "Lunch", "Sandwiches"],
           },
         },
+      },
+      expected,
+    );
+  });
+
+  it("Logs referenced URL that didn’t return a response", async () => {
+    mock.method(console, "error", () => {});
+
+    const expected = await fetchReferences({
+      type: "entry",
+      name: "What my friend ate for lunch yesterday",
+      published: "2019-02-12T10:00:00.000+00:00",
+      url: "https://website.example/bookmarks/lunch",
+      "bookmark-of": "https://another.example/404.html",
+    });
+
+    assert.equal(
+      console.error.mock.calls[0].arguments[0],
+      `Unable to fetch reference for https://another.example/404.html (Not Found)`,
+    );
+
+    assert.deepEqual(
+      {
+        type: "entry",
+        name: "What my friend ate for lunch yesterday",
+        published: "2019-02-12T10:00:00.000+00:00",
+        url: "https://website.example/bookmarks/lunch",
+        "bookmark-of": "https://another.example/404.html",
       },
       expected,
     );
