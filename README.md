@@ -98,7 +98,7 @@ Returns:
 ```
 
 > [!NOTE]\
-> Values for `url`, and any property prefixed with `mp-`, are excluded from referencing.
+> Values for `audio`, `photo`, `url`, `video` and any property prefixed with `mp-`, are excluded from referencing.
 
 ## Testing
 
