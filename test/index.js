@@ -657,6 +657,12 @@ describe("mf2tojf2", () => {
           properties: {
             name: ["What my friend ate for lunch yesterday"],
             published: ["2019-02-12T10:00:00.000+00:00"],
+            featured: [
+              {
+                value: "https://website.example/media/lunch.jpg",
+                alt: "A cheese sandwich",
+              },
+            ],
             url: ["https://website.example/bookmarks/lunch"],
             "mp-syndicate-to": "https://example.social/@username",
           },
@@ -669,6 +675,12 @@ describe("mf2tojf2", () => {
         type: "entry",
         name: "What my friend ate for lunch yesterday",
         published: "2019-02-12T10:00:00.000+00:00",
+        featured: [
+          {
+            url: "https://website.example/media/lunch.jpg",
+            alt: "A cheese sandwich",
+          },
+        ],
         url: "https://website.example/bookmarks/lunch",
         "mp-syndicate-to": "https://example.social/@username",
       },
