@@ -1,6 +1,6 @@
 # MF2 to JF2
 
-[![Build status](https://github.com/getindiekit/mf2tojf2/workflows/build/badge.svg)](https://github.com/getindiekit/mf2tojf2/actions)
+[![Test status](https://github.com/getindiekit/mf2tojf2/workflows/test/badge.svg)](https://github.com/getindiekit/mf2tojf2/actions)
 
 Convert [MF2](https://microformats.org/wiki/microformats2-parsing) to [JF2](https://jf2.spec.indieweb.org).
 
