@@ -7,7 +7,7 @@
     "mf2",
     "jf2"
   ],
-  "homepage": "https://github.com/paulrobertlloyd/mf2tojf2#readme",
+  "homepage": "https://github.com/getindiekit/mf2tojf2#readme",
   "author": {
     "name": "Paul Robert Lloyd",
     "url": "https://paulrobertlloyd.com"
@@ -22,8 +22,11 @@
     "lib",
     "index.js"
   ],
-  "bugs": "https://github.com/paulrobertlloyd/mf2tojf2/issues",
-  "repository": "git://github.com/paulrobertlloyd/mf2tojf2.git",
+  "bugs": "https://github.com/getindiekit/mf2tojf2/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/getindiekit/mf2tojf2.git"
+  },
   "scripts": {
     "lint:prettier": "prettier . --check",
     "lint:prettier:fix": "prettier . --write",
