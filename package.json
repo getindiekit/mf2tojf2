@@ -50,7 +50,7 @@
     "eslint-plugin-jsdoc": "^61.0.0",
     "eslint-plugin-unicorn": "^62.0.0",
     "husky": "^9.0.0",
-    "np": "^10.0.0",
+    "np": "^11.0.1",
     "prettier": "^3.0.0",
     "undici": "^7.0.0"
   },
