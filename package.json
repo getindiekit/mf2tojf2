@@ -47,7 +47,7 @@
     "@commitlint/config-conventional": "^20.0.0",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^10.0.0",
-    "eslint-plugin-jsdoc": "^61.0.0",
+    "eslint-plugin-jsdoc": "^62.4.1",
     "eslint-plugin-unicorn": "^62.0.0",
     "husky": "^9.0.0",
     "np": "^10.0.0",
