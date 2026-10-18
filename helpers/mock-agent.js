@@ -16,6 +16,19 @@ export const mockClient = () => {
     .intercept({ path: "/notes/lunch" })
     .reply(200, getFixture("fixtures/bookmark.html"));
 
+  // Get bookmark (Moved Permanently)
+  agent
+    .get("https://short.example")
+    .intercept({ path: "/lunch" })
+    .reply(301, "", {
+      headers: { location: "https://website.example/2019/01/lunch" },
+    });
+
+  agent
+    .get("https://website.example")
+    .intercept({ path: "/2019/01/lunch" })
+    .reply(200, getFixture("fixtures/bookmark.html"));
+
   // Get page without MF2
   agent
     .get("https://github.com")

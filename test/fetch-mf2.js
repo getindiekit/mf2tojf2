@@ -56,6 +56,21 @@ describe("fetchMf2", () => {
     );
   });
 
+  it("Resolves relative URLs against redirected URL", async () => {
+    const expected = await fetchMf2("https://short.example/lunch");
+
+    assert.deepEqual(
+      {
+        tag: [
+          "https://website.example/tag/food",
+          "https://website.example/tag/lunch",
+          "https://website.example/tag/sandwiches/",
+        ],
+      },
+      expected.rels,
+    );
+  });
+
   it("Throws error fetching Microformats2 from a given URL", async () => {
     assert.rejects(
       async () => {
