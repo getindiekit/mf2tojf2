@@ -9,7 +9,7 @@ import { fetchReferences } from "../lib/fetch-references.js";
 
 setGlobalDispatcher(mockClient());
 
-const bookmarkHtml = String(getFixture("fixtures/bookmark.html"));
+const bookmarkHtml = getFixture("fixtures/bookmark.html");
 
 describe("fetchReferences", () => {
   it("Fetches JF2 properties for each referenced URL", async () => {

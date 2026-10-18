@@ -1,14 +1,10 @@
 import fs from "node:fs";
-import { fileURLToPath } from "node:url";
+import path from "node:path";
 
 /**
+ * Get fixture file contents
  * @param {string} filename - Fixture’s file name
- * @param {boolean} isUtf8 - Encoding fixture as UTF8
- * @returns {string|Buffer} File contents
+ * @returns {string} File contents
  */
-export const getFixture = (filename, isUtf8 = true) => {
-  const file = fileURLToPath(new URL(filename, import.meta.url));
-  return fs.readFileSync(file, {
-    ...(isUtf8 && { encoding: "utf8" }),
-  });
-};
+export const getFixture = (filename) =>
+  fs.readFileSync(path.join(import.meta.dirname, filename), "utf8");
