@@ -43,3 +43,6 @@ export type Jf2Value = string | number | undefined | Jf2 | Jf2Value[];
 
 /** JF2 object */
 export type Jf2 = { [key: string]: Jf2Value };
+
+/** JF2 for a whole document: one object, or several objects in `children` */
+export type Jf2Document = { [key: string]: Jf2Value; children?: Jf2[] };
