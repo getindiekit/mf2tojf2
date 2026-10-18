@@ -152,6 +152,75 @@ describe("fetchReferences", () => {
     ]);
   });
 
+  it("Doesn’t modify the given JF2", async (t) => {
+    t.mock.method(
+      globalThis,
+      "fetch",
+      async () =>
+        new Response(bookmarkHtml, {
+          headers: { "content-type": "text/html" },
+        }),
+    );
+
+    const jf2 = {
+      type: "entry",
+      "bookmark-of": "https://website.example/notes/lunch",
+    };
+
+    const expected = await fetchReferences(jf2);
+
+    assert.notEqual(expected, jf2);
+    assert.ok(expected.references);
+    assert.deepEqual(jf2, {
+      type: "entry",
+      "bookmark-of": "https://website.example/notes/lunch",
+    });
+  });
+
+  it("Doesn’t modify existing references", async (t) => {
+    t.mock.method(
+      globalThis,
+      "fetch",
+      async () =>
+        new Response(bookmarkHtml, {
+          headers: { "content-type": "text/html" },
+        }),
+    );
+
+    const existingReferences = {
+      "https://another.example/notes/dinner": {
+        url: "https://another.example/notes/dinner",
+        type: "entry",
+      },
+    };
+
+    const expected = await fetchReferences({
+      type: "entry",
+      "bookmark-of": "https://website.example/notes/lunch",
+      references: existingReferences,
+    });
+
+    assert.deepEqual(Object.keys(expected.references ?? {}), [
+      "https://another.example/notes/dinner",
+      "https://website.example/notes/lunch",
+    ]);
+    assert.deepEqual(Object.keys(existingReferences), [
+      "https://another.example/notes/dinner",
+    ]);
+  });
+
+  it("Returns a copy of JF2 without references", async () => {
+    const jf2 = {
+      type: "entry",
+      name: "What I ate for lunch",
+    };
+
+    const expected = await fetchReferences(jf2);
+
+    assert.notEqual(expected, jf2);
+    assert.deepEqual(expected, jf2);
+  });
+
   it("Uses metaformats fallback for each referenced URL", async () => {
     const expected = await fetchReferences({
       type: "entry",
