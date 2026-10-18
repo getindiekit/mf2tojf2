@@ -35,6 +35,29 @@ export const mockClient = () => {
     .intercept({ path: "/getindiekit/mf2tojf2" })
     .reply(200, getFixture("fixtures/repo.html"));
 
+  // Get bookmark (HTML with character set)
+  agent
+    .get("https://website.example")
+    .intercept({ path: "/notes/dinner" })
+    .reply(200, getFixture("fixtures/bookmark.html"), {
+      headers: { "content-type": "text/html; charset=utf-8" },
+    });
+
+  // Get image (Unsupported content type)
+  agent
+    .get("https://website.example")
+    .intercept({ path: "/photo.jpg" })
+    .reply(200, "", {
+      headers: { "content-type": "image/jpeg" },
+    });
+
+  // Get slow page (Timeout)
+  agent
+    .get("https://website.example")
+    .intercept({ path: "/slow" })
+    .reply(200, getFixture("fixtures/bookmark.html"))
+    .delay(500);
+
   // Get bookmark (Not Found)
   agent
     .get("https://website.example")

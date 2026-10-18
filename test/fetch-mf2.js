@@ -71,8 +71,27 @@ describe("fetchMf2", () => {
     );
   });
 
+  it("Fetches Microformats2 from HTML with a character set", async () => {
+    const expected = await fetchMf2("https://website.example/notes/dinner");
+
+    assert.deepEqual(expected.items?.[0].type, ["h-entry"]);
+  });
+
+  it("Throws error fetching content that isn’t HTML", async () => {
+    await assert.rejects(fetchMf2("https://website.example/photo.jpg"), {
+      message: "Unsupported content type: image/jpeg",
+    });
+  });
+
+  it("Throws error if response takes too long", async () => {
+    await assert.rejects(
+      fetchMf2("https://website.example/slow", { timeout: 50 }),
+      { name: "TimeoutError" },
+    );
+  });
+
   it("Throws error fetching Microformats2 from a given URL", async () => {
-    assert.rejects(
+    await assert.rejects(
       async () => {
         await fetchMf2("https://website.example/404.html");
       },
