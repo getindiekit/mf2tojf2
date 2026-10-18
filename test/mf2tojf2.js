@@ -85,6 +85,27 @@ describe("mf2tojf2", () => {
     );
   });
 
+  it("Returns type with multiple words", () => {
+    const expected = mf2tojf2({
+      items: [
+        {
+          type: ["h-review-aggregate"],
+          properties: {
+            name: ["Mediterranean Wraps"],
+          },
+        },
+      ],
+    });
+
+    assert.deepEqual(
+      {
+        type: "review-aggregate",
+        name: "Mediterranean Wraps",
+      },
+      expected,
+    );
+  });
+
   it("Returns string from an array with a single string value", () => {
     const expected = mf2tojf2({
       items: [
