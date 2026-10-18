@@ -15,7 +15,7 @@ JF2 is a simpler JSON serialization of microformats2 intended to be easier to co
 ### Simple (synchronous)
 
 ```js
-import { mf2tojf2 } from "mf2tojf2";
+import { mf2tojf2 } from "@paulrobertlloyd/mf2tojf2";
 
 const mf2 = {
   items: [
@@ -49,7 +49,7 @@ Returns:
 JF2 can include [a `references` property](https://jf2.spec.indieweb.org/#using-references) to exclude any non-authoritative data from the defined object.
 
 ```js
-import { mf2tojf2referenced } from "mf2tojf2";
+import { mf2tojf2referenced } from "@paulrobertlloyd/mf2tojf2";
 
 const mf2 = {
   items: [
@@ -98,7 +98,7 @@ Returns:
 ```
 
 > [!NOTE]\
-> Values for `audio`, `photo`, `url`, `video` and any property prefixed with `mp-`, are excluded from referencing.
+> Values for `audio`, `featured`, `photo`, `url`, `video` and any property prefixed with `mp-`, are excluded from referencing.
 
 ## Testing
 
