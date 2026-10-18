@@ -96,8 +96,20 @@ describe("fetchMf2", () => {
         await fetchMf2("https://website.example/404.html");
       },
       {
-        message: "Not Found",
+        message: "404 Not Found",
       },
     );
+  });
+
+  it("Throws error with status code if response has no status text", async (t) => {
+    t.mock.method(
+      globalThis,
+      "fetch",
+      async () => new Response("", { status: 502 }),
+    );
+
+    await assert.rejects(fetchMf2("https://website.example/notes/lunch"), {
+      message: "502",
+    });
   });
 });

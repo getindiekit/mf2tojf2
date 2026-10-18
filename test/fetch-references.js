@@ -62,7 +62,7 @@ describe("fetchReferences", () => {
 
     assert.equal(
       consoleError.mock.calls[0].arguments[0],
-      `Unable to fetch reference for https://another.example/404.html (Not Found)`,
+      `Unable to fetch reference for https://another.example/404.html (404 Not Found)`,
     );
 
     assert.deepEqual(
