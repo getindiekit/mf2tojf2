@@ -3,10 +3,13 @@ import { describe, it, mock } from "node:test";
 
 import { setGlobalDispatcher } from "undici";
 
+import { getFixture } from "../helpers/fixture.js";
 import { mockClient } from "../helpers/mock-agent.js";
 import { fetchReferences } from "../lib/fetch-references.js";
 
 setGlobalDispatcher(mockClient());
+
+const bookmarkHtml = String(getFixture("fixtures/bookmark.html"));
 
 describe("fetchReferences", () => {
   it("Fetches JF2 properties for each referenced URL", async () => {
@@ -97,6 +100,56 @@ describe("fetchReferences", () => {
       },
       expected,
     );
+  });
+
+  it("Fetches each referenced URL once", async (t) => {
+    const fetchMock = t.mock.method(
+      globalThis,
+      "fetch",
+      async () =>
+        new Response(bookmarkHtml, {
+          headers: { "content-type": "text/html" },
+        }),
+    );
+
+    const expected = await fetchReferences({
+      type: "entry",
+      "bookmark-of": "https://website.example/notes/lunch",
+      "in-reply-to": "https://website.example/notes/lunch",
+    });
+
+    assert.equal(fetchMock.mock.callCount(), 1);
+    assert.deepEqual(Object.keys(expected.references ?? {}), [
+      "https://website.example/notes/lunch",
+    ]);
+  });
+
+  it("Fetches referenced URLs at the same time", async (t) => {
+    let inFlight = 0;
+    let maxInFlight = 0;
+
+    t.mock.method(globalThis, "fetch", async () => {
+      inFlight++;
+      maxInFlight = Math.max(maxInFlight, inFlight);
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      inFlight--;
+
+      return new Response(bookmarkHtml, {
+        headers: { "content-type": "text/html" },
+      });
+    });
+
+    const expected = await fetchReferences({
+      type: "entry",
+      "bookmark-of": "https://website.example/notes/lunch",
+      "in-reply-to": "https://another.example/notes/lunch",
+    });
+
+    assert.equal(maxInFlight, 2);
+    assert.deepEqual(Object.keys(expected.references ?? {}), [
+      "https://website.example/notes/lunch",
+      "https://another.example/notes/lunch",
+    ]);
   });
 
   it("Uses metaformats fallback for each referenced URL", async () => {
