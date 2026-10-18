@@ -12,7 +12,7 @@ export const mockClient = () => {
 
   // Get bookmark
   agent
-    .get(/https:\/\/(website|another).example/)
+    .get(/^https:\/\/(website|another)\.example$/)
     .intercept({ path: "/notes/lunch" })
     .reply(200, getFixture("fixtures/bookmark.html"));
 
