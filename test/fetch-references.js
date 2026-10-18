@@ -50,7 +50,7 @@ describe("mf2tojf2", () => {
   });
 
   it("Logs referenced URL that didn’t return a response", async () => {
-    mock.method(console, "error", () => {});
+    const consoleError = mock.method(console, "error", () => {});
 
     const expected = await fetchReferences({
       type: "entry",
@@ -61,7 +61,7 @@ describe("mf2tojf2", () => {
     });
 
     assert.equal(
-      console.error.mock.calls[0].arguments[0],
+      consoleError.mock.calls[0].arguments[0],
       `Unable to fetch reference for https://another.example/404.html (Not Found)`,
     );
 
