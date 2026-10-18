@@ -239,6 +239,45 @@ describe("mf2tojf2", () => {
     );
   });
 
+  it("Returns content (multiple HTML values)", () => {
+    const expected = mf2tojf2({
+      items: [
+        {
+          type: ["h-entry"],
+          properties: {
+            name: ["Entry with content"],
+            content: [
+              {
+                html: "<p><b>First</b> content</p>",
+                value: "First content",
+              },
+              {
+                html: "<p><b>Second</b> content</p>",
+              },
+            ],
+          },
+        },
+      ],
+    });
+
+    assert.deepEqual(
+      {
+        type: "entry",
+        name: "Entry with content",
+        content: [
+          {
+            html: "<p><b>First</b> content</p>",
+            text: "First content",
+          },
+          {
+            html: "<p><b>Second</b> content</p>",
+          },
+        ],
+      },
+      expected,
+    );
+  });
+
   it("Returns media (from array containing single URL)", () => {
     const expected = mf2tojf2({
       items: [
