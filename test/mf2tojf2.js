@@ -60,6 +60,17 @@ describe("mf2tojf2", () => {
     );
   });
 
+  it("Returns values from items that aren’t microformats", () => {
+    // Flattens items that aren’t microformats (unchanged since 3.x)
+    // eslint-disable-next-line jsdoc/reject-any-type
+    assert.equal(mf2tojf2(/** @type {any} */ ({ items: ["Foo"] })), "Foo");
+    assert.deepEqual(
+      // eslint-disable-next-line jsdoc/reject-any-type
+      mf2tojf2(/** @type {any} */ ({ items: [{ html: "<p>Foo</p>" }] })),
+      { html: "<p>Foo</p>" },
+    );
+  });
+
   it("Returns flattened entry", () => {
     const expected = mf2tojf2({
       items: [
