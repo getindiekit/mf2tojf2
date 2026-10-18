@@ -8,7 +8,7 @@ import { fetchReferences } from "../lib/fetch-references.js";
 
 setGlobalDispatcher(mockClient());
 
-describe("mf2tojf2", () => {
+describe("fetchReferences", () => {
   it("Fetches JF2 properties for each referenced URL", async () => {
     const expected = await fetchReferences({
       type: "entry",

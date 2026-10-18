@@ -22,7 +22,8 @@ export default [
     files: ["**/*.js"],
     languageOptions: { globals: { ...globals.node }, ecmaVersion: "latest" },
     rules: {
-      "import-x/no-named-as-default": 0,
+      "import-x/no-cycle": "error",
+      "import-x/no-named-as-default": "error",
       "import-x/order": [
         "error",
         {
