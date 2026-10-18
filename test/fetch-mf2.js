@@ -1,8 +1,10 @@
 import { strict as assert } from "node:assert";
 import { describe, it } from "node:test";
+
 import { setGlobalDispatcher } from "undici";
-import { fetchMf2 } from "../lib/fetch-mf2.js";
+
 import { mockClient } from "../helpers/mock-agent.js";
+import { fetchMf2 } from "../lib/fetch-mf2.js";
 
 setGlobalDispatcher(mockClient());
 

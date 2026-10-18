@@ -1,8 +1,10 @@
 import { strict as assert } from "node:assert";
 import { describe, it, mock } from "node:test";
+
 import { setGlobalDispatcher } from "undici";
-import { fetchReferences } from "../lib/fetch-references.js";
+
 import { mockClient } from "../helpers/mock-agent.js";
+import { fetchReferences } from "../lib/fetch-references.js";
 
 setGlobalDispatcher(mockClient());
 

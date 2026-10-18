@@ -1,4 +1,5 @@
 import { MockAgent } from "undici";
+
 import { getFixture } from "./fixture.js";
 
 /**

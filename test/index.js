@@ -1,8 +1,10 @@
 import { strict as assert } from "node:assert";
 import { describe, it } from "node:test";
+
 import { setGlobalDispatcher } from "undici";
-import { mf2tojf2, mf2tojf2referenced } from "../index.js";
+
 import { mockClient } from "../helpers/mock-agent.js";
+import { mf2tojf2, mf2tojf2referenced } from "../index.js";
 
 setGlobalDispatcher(mockClient());
 
@@ -91,8 +93,8 @@ describe("mf2tojf2", () => {
           type: ["h-entry"],
           properties: {
             name: ["Entry with latitude and longitude"],
-            latitude: [45.524_330_801_154],
-            longitude: [-122.680_688_080_51],
+            latitude: [45.524330801154],
+            longitude: [-122.68068808051],
             "postal-code": ["97209"],
           },
         },
@@ -103,8 +105,8 @@ describe("mf2tojf2", () => {
       {
         type: "entry",
         name: "Entry with latitude and longitude",
-        latitude: 45.524_330_801_154,
-        longitude: -122.680_688_080_51,
+        latitude: 45.524330801154,
+        longitude: -122.68068808051,
         "postal-code": "97209",
       },
       expected,
