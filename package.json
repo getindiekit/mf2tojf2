@@ -37,7 +37,8 @@
     "test": "node --test --test-reporter spec",
     "test:coverage": "node --test --experimental-test-coverage",
     "release": "np --no-publish",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typecheck": "tsc -p jsconfig.json"
   },
   "dependencies": {
     "microformats-parser": "^2.0.6"
@@ -46,6 +47,7 @@
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.5",
     "eslint": "^10.13.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import-x": "^4.17.1",

@@ -25,6 +25,8 @@ jobs:
         run: npm install -g npm@latest # Ensure npm 11.5.1 or later is installed
       - name: Install dependencies
         run: npm ci
+      - name: Run typechecker
+        run: npm run typecheck
       - name: Run tests
         run: npm test
       - name: Publish to npm
