@@ -38,6 +38,28 @@ describe("mf2tojf2", () => {
     );
   });
 
+  it("Omits properties without any values", () => {
+    const expected = mf2tojf2({
+      items: [
+        {
+          type: ["h-entry"],
+          properties: {
+            name: ["Lunch"],
+            category: [],
+          },
+        },
+      ],
+    });
+
+    assert.deepEqual(
+      {
+        type: "entry",
+        name: "Lunch",
+      },
+      expected,
+    );
+  });
+
   it("Returns flattened entry", () => {
     const expected = mf2tojf2({
       items: [
