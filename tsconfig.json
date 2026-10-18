@@ -10,8 +10,5 @@
     "target": "es2022",
     "types": ["node"]
   },
-  "exclude": ["./node_modules"],
-  "typeAcquisition": {
-    "enable": false
-  }
+  "exclude": ["types"]
 }

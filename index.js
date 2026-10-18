@@ -29,5 +29,6 @@ export const mf2tojf2referenced = async (mf2) => {
 };
 
 /**
- * @import { Jf2, Mf2 } from "./lib/types.js"
+ * @typedef {import("./lib/types.js").Jf2} Jf2
+ * @typedef {import("./lib/types.js").Mf2} Mf2
  */

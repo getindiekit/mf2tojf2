@@ -17,10 +17,18 @@
     "node": ">=22"
   },
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./index.js"
+    }
+  },
   "main": "index.js",
+  "types": "./types/index.d.ts",
   "files": [
-    "lib",
-    "index.js"
+    "index.js",
+    "lib/*.js",
+    "types"
   ],
   "bugs": "https://github.com/getindiekit/mf2tojf2/issues",
   "repository": {
@@ -38,7 +46,9 @@
     "test:coverage": "node --test --experimental-test-coverage",
     "release": "np --no-publish",
     "prepare": "husky install",
-    "typecheck": "tsc -p jsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "npm run build"
   },
   "dependencies": {
     "microformats-parser": "^2.0.6"
@@ -56,6 +66,7 @@
     "husky": "^9.1.7",
     "np": "^12.1.1",
     "prettier": "^3.9.10",
+    "typescript": "^6.0.3",
     "undici": "^8.12.2"
   },
   "publishConfig": {
