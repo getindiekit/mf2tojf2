@@ -77,6 +77,28 @@ describe("fetchReferences", () => {
     );
   });
 
+  it("Ignores values that aren’t web URLs", async () => {
+    const consoleError = mock.method(console, "error", () => {});
+
+    const expected = await fetchReferences({
+      type: "entry",
+      name: "Lunch: a cheese sandwich",
+      "in-reply-to": "mailto:friend@website.example",
+      "bookmark-of": "urn:isbn:9780141036144",
+    });
+
+    assert.equal(consoleError.mock.callCount(), 0);
+    assert.deepEqual(
+      {
+        type: "entry",
+        name: "Lunch: a cheese sandwich",
+        "in-reply-to": "mailto:friend@website.example",
+        "bookmark-of": "urn:isbn:9780141036144",
+      },
+      expected,
+    );
+  });
+
   it("Uses metaformats fallback for each referenced URL", async () => {
     const expected = await fetchReferences({
       type: "entry",
