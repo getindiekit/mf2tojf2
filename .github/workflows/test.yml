@@ -5,6 +5,9 @@ on:
     branches-ignore:
       - dependabot/*
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Run tests
