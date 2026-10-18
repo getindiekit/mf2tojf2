@@ -45,7 +45,7 @@
     "test": "node --test --test-reporter spec",
     "test:coverage": "node --test --experimental-test-coverage",
     "release": "np --no-publish",
-    "prepare": "husky install",
+    "prepare": "husky",
     "typecheck": "tsc -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json",
     "prepack": "npm run build"
